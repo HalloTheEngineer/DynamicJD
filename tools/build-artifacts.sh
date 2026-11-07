@@ -11,7 +11,7 @@ DIST="$ROOT/dist"
 rm -rf "$DIST"
 mkdir -p "$DIST"
 
-dotnet test Tests/DynamicJD.Tests/DynamicJD.Tests.csproj -c Release --nologo
+dotnet test Source/Tests/DynamicJD.Tests/DynamicJD.Tests.csproj -c Release --nologo
 
 build_one() {
     local id="$1"
@@ -21,13 +21,13 @@ build_one() {
     local directory="$5"
 
     echo "=== Building DynamicJD for Beat Saber $range"
-    dotnet build -t:Rebuild -c Release \
+    dotnet build Source/DynamicJD.csproj -t:Rebuild -c Release \
         -p:GameVersion="$game" \
         -p:GameDirectory="${directory%/}/" \
         -p:VersionFamily="$family" \
         --nologo
 
-    local dll="bin/Release/DynamicJD.dll"
+    local dll="Source/bin/Release/DynamicJD.dll"
     test -f "$dll"
 
     if ! strings -a "$dll" | grep -F "\"gameVersion\": \"$game\"" >/dev/null; then
@@ -38,8 +38,8 @@ build_one() {
     local stage="$DIST/$id"
     mkdir -p "$stage/Plugins"
     cp "$dll" "$stage/Plugins/DynamicJD.dll"
-    if [ -f bin/Release/DynamicJD.pdb ]; then
-        cp bin/Release/DynamicJD.pdb "$stage/Plugins/DynamicJD.pdb"
+    if [ -f Source/bin/Release/DynamicJD.pdb ]; then
+        cp Source/bin/Release/DynamicJD.pdb "$stage/Plugins/DynamicJD.pdb"
     fi
 
     (cd "$stage" && zip -qr "$DIST/DynamicJD-0.1.0-bs${range}.zip" Plugins)

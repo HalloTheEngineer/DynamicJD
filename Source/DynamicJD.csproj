@@ -20,8 +20,8 @@
   <PropertyGroup>
     <VersionFamily Condition="'$(VersionFamily)' == ''">modern</VersionFamily>
     <GameVersion Condition="'$(GameVersion)' == ''">1.44.1</GameVersion>
-    <ManifestPath Condition="'$(VersionFamily)' == 'legacy'">Versioning\manifest-legacy.json</ManifestPath>
-    <ManifestPath Condition="'$(VersionFamily)' == 'modern'">Versioning\manifest-modern.json</ManifestPath>
+    <ManifestPath Condition="'$(VersionFamily)' == 'legacy'">..\Versioning\manifest-legacy.json</ManifestPath>
+    <ManifestPath Condition="'$(VersionFamily)' == 'modern'">..\Versioning\manifest-modern.json</ManifestPath>
     <DefineConstants Condition="'$(VersionFamily)' == 'modern'">$(DefineConstants);BS_MODERN</DefineConstants>
     <DefineConstants Condition="'$(VersionFamily)' == 'legacy'">$(DefineConstants);BS_LEGACY</DefineConstants>
   </PropertyGroup>
@@ -136,10 +136,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Versioning\manifest-legacy.json"
+    <EmbeddedResource Include="..\Versioning\manifest-legacy.json"
                       Condition="'$(VersionFamily)' == 'legacy'"
                       LogicalName="DynamicJD.manifest.json" />
-    <EmbeddedResource Include="Versioning\manifest-modern.json"
+    <EmbeddedResource Include="..\Versioning\manifest-modern.json"
                       Condition="'$(VersionFamily)' == 'modern'"
                       LogicalName="DynamicJD.manifest.json" />
     <EmbeddedResource Include="UI\Menu\*.bsml" />
