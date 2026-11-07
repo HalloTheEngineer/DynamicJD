@@ -1,0 +1,20 @@
+[
+  {
+    "id": "legacy",
+    "range": "1.40.8",
+    "gameVersion": "1.40.8",
+    "versionFamily": "legacy",
+    "manifest": "legacy",
+    "status": "stable",
+    "prerelease": false
+  },
+  {
+    "id": "bs142",
+    "range": "1.42.0",
+    "gameVersion": "1.42.0",
+    "versionFamily": "modern",
+    "manifest": "modern",
+    "status": "alpha",
+    "prerelease": true
+  }
+]

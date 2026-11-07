@@ -1,0 +1,45 @@
+<bg xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+    xsi:schemaLocation='https://monkeymanboy.github.io/BSML-Docs/ https://monkeymanboy.github.io/BSML-Docs/BSMLSchema.xsd'>
+    <vertical child-control-width='true' child-expand-width='true' spacing='1'
+              preferred-width='130' horizontal-fit='PreferredSize'>
+        <horizontal preferred-width='130'>
+            <text text='Search BeatLeader, then build a base setup from their public replay JD.' font-size='3' align='Left' word-wrapping='true'/>
+        </horizontal>
+        <horizontal preferred-width='130' spacing='4' child-control-width='true' child-expand-width='true'>
+            <vertical preferred-width='50' spacing='1'>
+                <horizontal preferred-width='100'>
+                    <text text='BUILD LOG' font-size='4' align='Left' font-color='#cc99ffff' underlined='true'/>
+                </horizontal>
+                <horizontal preferred-width='100' preferred-height='2'/>
+                <text text='~clone_feed' font-size='3' align='Left' word-wrapping='true' rich-text='true'/>
+            </vertical>
+            <vertical preferred-width='76' spacing='1'>
+                <horizontal preferred-width='100' child-control-width='true' child-expand-width='true'>
+                    <string-setting id='clone_search_setting' value='clone_search' on-change='set_clone_search'
+                                    apply-on-change='true' bind-value='true' text='Player search' preferred-width='54'
+                                    interactable='~can_search'/>
+                    <button text='Search' on-click='search_players' interactable='~can_search'/>
+                </horizontal>
+                <list id='search_results' list-style='Simple' select-cell='select_search_result'
+                      visible-cells='4' list-width='70' show-scrollbar='true' stick-scrolling='true'/>
+                <horizontal preferred-width='100'>
+                    <text text='~selected_text' font-size='3' align='Left' rich-text='true' word-wrapping='true'/>
+                </horizontal>
+                <increment-setting value='clone_count_value' on-change='set_clone_count'
+                                   apply-on-change='true' bind-value='true'
+                                   text='Plays to analyze' integer-only='true' min='10' max='300' increment='10'
+                                   interactable='~can_edit_count'/>
+                <horizontal>
+                    <button text='Build setup' on-click='analyze_clone' interactable='~can_build'/>
+                    <button text='Save to Per-Player' on-click='adopt_clone' interactable='~can_save'/>
+                </horizontal>
+                <horizontal preferred-width='100' preferred-height='2'/>
+                <horizontal preferred-width='100' child-control-width='true' child-expand-width='true'>
+                    <image id='clone_spinner' preserve-aspect='true' preferred-width='4' preferred-height='4'
+                           active='~clone_activity'/>
+                    <text text='~clone_status' font-size='3' align='Left' word-wrapping='true' rich-text='true'/>
+                </horizontal>
+            </vertical>
+        </horizontal>
+    </vertical>
+</bg>

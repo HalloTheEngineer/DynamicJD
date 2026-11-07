@@ -1,0 +1,19 @@
+{
+  "$schema": "https://raw.githubusercontent.com/nike4613/ModSaber-MetadataFileSchema/master/Schema.json",
+  "author": "DynamicJD contributors",
+  "description": "Dynamic, type-aware jump distance profiles with BeatLeader-powered cloning and in-game tuning.",
+  "gameVersion": "1.42.0",
+  "id": "DynamicJD",
+  "name": "DynamicJD",
+  "version": "0.1.0",
+  "dependsOn": {
+    "BSIPA": "^4.3.7",
+    "BeatSaberMarkupLanguage": "^1.14.1",
+    "SiraUtil": "^3.4.0"
+  },
+  "loadAfter": [
+    "BeatLeader",
+    "ScoreSaber"
+  ],
+  "links": {}
+}

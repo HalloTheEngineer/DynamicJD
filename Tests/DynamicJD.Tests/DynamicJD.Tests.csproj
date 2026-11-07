@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <AssemblyName>DynamicJD.Tests</AssemblyName>
+    <RootNamespace>DynamicJD.Tests</RootNamespace>
+    <IsPackable>false</IsPackable>
+    <IsTestProject>true</IsTestProject>
+    <Nullable>disable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.11.1" />
+    <PackageReference Include="xunit" Version="2.9.2" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.8.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="..\..\Core\**\*.cs" LinkBase="Core" />
+    <Compile Include="..\..\Api\BsorHeader.cs" LinkBase="Api" />
+    <Compile Include="..\..\Api\BsorHeaderReader.cs" LinkBase="Api" />
+  </ItemGroup>
+</Project>

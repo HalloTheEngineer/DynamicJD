@@ -1,0 +1,11 @@
+<bg xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+    xsi:schemaLocation='https://monkeymanboy.github.io/BSML-Docs/ https://monkeymanboy.github.io/BSML-Docs/BSMLSchema.xsd'>
+    <horizontal preferred-width='80' preferred-height='9' size-delta-x='-6' spacing='3'
+                child-control-width='true' child-expand-width='true'>
+        <checkbox-setting value='manual_override' on-change='set_manual_override'
+                          text='' preferred-width='18'/>
+        <slider-setting value='manual_jd' on-change='set_manual_jd' apply-on-change='true' bind-value='true'
+                        text='' increment='0.1' min='4' max='32' preferred-width='48' show-buttons='true'
+                        formatter='manual_jd_formatter' interactable='~manual_active'/>
+    </horizontal>
+</bg>

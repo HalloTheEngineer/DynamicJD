@@ -1,0 +1,136 @@
+<bg xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+    xsi:schemaLocation='https://monkeymanboy.github.io/BSML-Docs/ https://monkeymanboy.github.io/BSML-Docs/BSMLSchema.xsd'>
+    <settings-container child-control-width='true' child-expand-width='true' size-delta-y='-8'>
+        <horizontal active='~has_map' preferred-width='100' preferred-height='6'>
+            <text text='~map_title' font-size='4' align='Left' rich-text='true' overflow-mode='Ellipsis'/>
+        </horizontal>
+        <horizontal active='~has_map' preferred-width='100' preferred-height='5'
+                    child-control-width='true' child-expand-width='true'>
+            <text text='NJS' align='Left'/>
+            <text text='~map_njs' align='Right' rich-text='true'/>
+        </horizontal>
+        <horizontal active='~has_map' preferred-width='100' preferred-height='5'
+                    child-control-width='true' child-expand-width='true'>
+            <text text='Map default JD / RT' align='Left'/>
+            <text text='~map_jd' align='Right' rich-text='true'/>
+        </horizontal>
+        <horizontal active='~has_map' preferred-width='100' preferred-height='5'
+                    child-control-width='true' child-expand-width='true'>
+            <text text='Your JD / RT' align='Left'/>
+            <text text='~target_jd_rt' align='Right' rich-text='true'/>
+        </horizontal>
+
+        <increment-setting id='profile_increment' value='profile_index' on-change='set_profile_index'
+                           apply-on-change='true' bind-value='true'
+                           text='Base JD profile' integer-only='true' min='0' max='~profile_max'
+                           interactable='~not_manual' formatter='profile_formatter'
+                           hover-hint='Base JD/RT style. Adaptive map-type shaping is applied on top.'/>
+        <horizontal preferred-width='100' preferred-height='5'>
+            <text text='~profile_description' font-size='3' align='Left' rich-text='true' overflow-mode='Ellipsis'/>
+        </horizontal>
+        <horizontal preferred-width='100' preferred-height='5'>
+            <text text='~model_summary' font-size='3' align='Left' rich-text='true' overflow-mode='Ellipsis'/>
+        </horizontal>
+        <horizontal preferred-width='100' preferred-height='6' active='~is_per_player_active'/>
+        <grid cell-size-x='100' cell-size-y='6' active='~is_per_player_active'>
+            <text text="COPY A PLAYER'S SETUP" font-size='4' align='Center' font-color='#cc99ffff' underlined='true'/>
+        </grid>
+        <horizontal preferred-width='100' preferred-height='6' active='~is_per_player_active'/>
+        <increment-setting id='per_player_increment' value='per_player_index' on-change='set_per_player_index'
+                           apply-on-change='true' bind-value='true'
+                           text='Player' integer-only='true' min='0' max='~per_player_max'
+                           formatter='per_player_formatter' active='~show_per_player_selector'/>
+        <horizontal preferred-width='100' preferred-height='8' active='~is_per_player_active'>
+            <text text='~per_player_summary' font-size='3' align='Left' rich-text='true' word-wrapping='true'/>
+        </horizontal>
+        <horizontal preferred-width='100' preferred-height='2' active='~is_per_player_active'/>
+        <horizontal active='~is_per_player_active'>
+            <button text='Remove player' on-click='remove_per_player' active='~has_per_player_entries'/>
+            <button text="Copy a player's setup" on-click='open_clone'/>
+        </horizontal>
+        <button text='Refresh suggestion' on-click='refresh_suggestion' active='~show_suggestion_button'
+                interactable='~suggestion_interactable' align='Center'/>
+        <horizontal preferred-width='100' preferred-height='5' active='~show_suggestion_button'
+                    child-control-width='true' child-expand-width='true'>
+            <image id='suggestion_spinner' preserve-aspect='true' preferred-width='4' preferred-height='4'
+                   active='~suggestion_busy'/>
+            <text text='~suggestion_status' font-size='3' align='Left' rich-text='true' overflow-mode='Ellipsis'/>
+        </horizontal>
+
+        <horizontal preferred-width='100' preferred-height='5' active='~is_custom_active'/>
+        <grid cell-size-x='100' cell-size-y='6' active='~is_custom_active'>
+            <text text='YOUR SETUP' font-size='4' align='Center' font-color='#cc99ffff' underlined='true'/>
+        </grid>
+        <horizontal preferred-width='100' preferred-height='4' active='~is_custom_active'/>
+        <increment-setting value='config_mode' on-change='set_config_mode'
+                           apply-on-change='true' bind-value='true'
+                           text='Tune by' integer-only='true' min='0' max='1'
+                           formatter='config_mode_formatter' interactable='~not_manual' active='~is_custom_active'/>
+        <slider-setting value='rt_value' on-change='set_rt_value' apply-on-change='true' bind-value='true'
+                        text='Reaction time' increment='1' min='100' max='900'
+                        formatter='rt_formatter' active='~show_rt_editor' interactable='~not_manual'/>
+        <slider-setting value='jd_value' on-change='set_jd_value' apply-on-change='true' bind-value='true'
+                        text='Jump distance' increment='0.1' min='8' max='72'
+                        formatter='jd_formatter' active='~show_jd_editor' interactable='~not_manual'/>
+        <slider-setting value='slope_value' on-change='set_slope_value' apply-on-change='true' bind-value='true'
+                        text='NJS scaling' increment='0.1' min='-35' max='5'
+                        formatter='slope_formatter' interactable='~not_manual' active='~is_custom_active'
+                        hover-hint='Reaction-time change per NJS. 0 keeps base RT constant across NJS.'/>
+        <slider-setting value='curvature_value' on-change='set_curvature_value' apply-on-change='true' bind-value='true'
+                        text='Curve strength' increment='0.05' min='-2' max='2'
+                        formatter='curvature_formatter' interactable='~not_manual' active='~is_custom_active'
+                        hover-hint='Optional quadratic RT term. 0 keeps the classic linear profile.'/>
+        <slider-setting value='apply_strength' on-change='set_apply_strength' apply-on-change='true' bind-value='true'
+                        text='Profile influence' increment='0.05' min='0' max='1'
+                        formatter='apply_strength_formatter' interactable='~not_manual' active='~is_custom_active'
+                        hover-hint='Blend the resolved target with the map-authored JD. 100% is full model.'/>
+
+        <increment-setting value='type_model_index' on-change='set_type_model_index'
+                           apply-on-change='true' bind-value='true'
+                           text='Type adaptation' integer-only='true' min='0' max='~type_model_max'
+                           formatter='type_model_formatter' interactable='~not_manual'
+                           hover-hint='Inferred map types use metric/tag heuristics and may be less accurate than BeatLeader-provided types.'/>
+        <slider-setting value='type_model_strength' on-change='set_type_model_strength'
+                        apply-on-change='true' bind-value='true'
+                        text='Type influence' increment='0.05' min='0' max='1'
+                        formatter='type_model_strength_formatter' interactable='~not_manual'
+                        hover-hint='Global type influence. The clone sets a recommended value once when saved.'/>
+        <horizontal preferred-width='100' preferred-height='5'>
+            <text text='~type_model_summary' font-size='3' align='Left' rich-text='true' overflow-mode='Ellipsis'/>
+        </horizontal>
+
+        <horizontal preferred-width='100' preferred-height='5'/>
+        <grid cell-size-x='100' cell-size-y='6'>
+            <text text='ADVANCED' font-size='4' align='Center' font-color='#cc99ffff' underlined='true'/>
+        </grid>
+        <horizontal preferred-width='100' preferred-height='4'/>
+        <checkbox-setting value='preserve_rt_at_song_speed' text='Preserve RT at song speed'
+                          on-change='set_preserve_rt_at_song_speed'
+                          hover-hint='Adjust target JD for Faster/Slower Song so real reaction time stays constant.'/>
+        <checkbox-setting value='njs_event_compensation' text='NJS event compensation'
+                          on-change='set_njs_event_compensation'
+                          interactable='~njs_compensation_interactable'
+                          hover-hint='Keeps RT stable when NJS events change the approach speed. Enabled only while preserving RT at song speed.'/>
+        <checkbox-setting value='respect_vanilla_offset' text='Respect map offset'
+                          on-change='set_respect_vanilla_offset'
+                          hover-hint='Use the map-authored NJS offset instead of the model-calculated offset.'/>
+        <slider-setting value='min_jump_distance' on-change='set_min_jump_distance'
+                        apply-on-change='true' bind-value='true'
+                        text='Minimum JD' increment='0.5' min='1' max='99'
+                        formatter='min_jump_distance_formatter'/>
+        <slider-setting value='max_jump_distance' on-change='set_max_jump_distance'
+                        apply-on-change='true' bind-value='true'
+                        text='Maximum JD' increment='0.5' min='2' max='100'
+                        formatter='max_jump_distance_formatter'/>
+        <horizontal preferred-width='100' preferred-height='4'/>
+
+        <checkbox-setting value='apply_in_replays' text='Apply to replays'
+                          on-change='set_apply_in_replays'
+                          hover-hint='Apply DynamicJD JD/NJS shaping and instant note rotation during replay playback. Replay note motion may differ from the recorded replay.'/>
+        <checkbox-setting value='instant_note_rotation' text='Instant note rotation'
+                          on-change='set_instant_note_rotation'
+                          hover-hint='Skip note sway and snap notes to their final rotation. Applied to replays when Apply to replays is enabled.'/>
+        <checkbox-setting value='enabled' text='Enabled' on-change='set_enabled'
+                          hover-hint='Apply DynamicJD to maps when they start.'/>
+    </settings-container>
+</bg>

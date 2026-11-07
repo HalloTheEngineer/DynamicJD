@@ -1,0 +1,149 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net48</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <AssemblyName>DynamicJD</AssemblyName>
+    <RootNamespace>DynamicJD</RootNamespace>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <DebugType>portable</DebugType>
+    <CopyPDB>true</CopyPDB>
+    <GenerateManifest>false</GenerateManifest>
+    <BSMTProjectType>BSIPA</BSMTProjectType>
+    <IsPackable>false</IsPackable>
+    <NoWarn>$(NoWarn);CS0618</NoWarn>
+    <DisableCopyToGame>true</DisableCopyToGame>
+    <DisableZipRelease>true</DisableZipRelease>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <VersionFamily Condition="'$(VersionFamily)' == ''">modern</VersionFamily>
+    <GameVersion Condition="'$(GameVersion)' == ''">1.44.1</GameVersion>
+    <ManifestPath Condition="'$(VersionFamily)' == 'legacy'">Versioning\manifest-legacy.json</ManifestPath>
+    <ManifestPath Condition="'$(VersionFamily)' == 'modern'">Versioning\manifest-modern.json</ManifestPath>
+    <DefineConstants Condition="'$(VersionFamily)' == 'modern'">$(DefineConstants);BS_MODERN</DefineConstants>
+    <DefineConstants Condition="'$(VersionFamily)' == 'legacy'">$(DefineConstants);BS_LEGACY</DefineConstants>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Tests\**" />
+    <EmbeddedResource Remove="Tests\**" />
+    <None Remove="Tests\**" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <GameDirectory Condition="'$(GameDirectory)' == ''">/home/henry/.local/share/BSManager/BSInstances/1.44.1/</GameDirectory>
+    <RefAsmDir>$(GameDirectory)Beat Saber_Data\Managed</RefAsmDir>
+    <LibsDir>$(GameDirectory)Libs</LibsDir>
+    <PluginsDir>$(GameDirectory)Plugins</PluginsDir>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="BeatSaberModdingTools.Tasks" Version="2.0.0-beta4" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.3" PrivateAssets="all" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="0Harmony">
+      <HintPath>$(LibsDir)\0Harmony.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="BSML">
+      <HintPath>$(PluginsDir)\BSML.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="SiraUtil">
+      <HintPath>$(PluginsDir)\SiraUtil.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="IPA.Loader">
+      <HintPath>$(RefAsmDir)\IPA.Loader.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Main">
+      <HintPath>$(RefAsmDir)\Main.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="BGLib.UnityExtension">
+      <HintPath>$(RefAsmDir)\BGLib.UnityExtension.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="BGLib.AppFlow">
+      <HintPath>$(RefAsmDir)\BGLib.AppFlow.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Core">
+      <HintPath>$(RefAsmDir)\Core.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="DataModels">
+      <HintPath>$(RefAsmDir)\DataModels.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="GameplayCore">
+      <HintPath>$(RefAsmDir)\GameplayCore.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="BeatmapCore">
+      <HintPath>$(RefAsmDir)\BeatmapCore.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="HMUI">
+      <HintPath>$(RefAsmDir)\HMUI.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="BeatSaber.ViewSystem">
+      <HintPath>$(RefAsmDir)\BeatSaber.ViewSystem.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Unity.TextMeshPro">
+      <HintPath>$(RefAsmDir)\Unity.TextMeshPro.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="UnityEngine.CoreModule">
+      <HintPath>$(RefAsmDir)\UnityEngine.CoreModule.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>$(RefAsmDir)\UnityEngine.UI.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UIModule">
+      <HintPath>$(RefAsmDir)\UnityEngine.UIModule.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UnityWebRequestModule">
+      <HintPath>$(RefAsmDir)\UnityEngine.UnityWebRequestModule.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>$(RefAsmDir)\Newtonsoft.Json.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="System.Net.Http">
+      <HintPath>$(RefAsmDir)\System.Net.Http.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Zenject">
+      <HintPath>$(RefAsmDir)\Zenject.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Zenject-usage">
+      <HintPath>$(RefAsmDir)\Zenject-usage.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Versioning\manifest-legacy.json"
+                      Condition="'$(VersionFamily)' == 'legacy'"
+                      LogicalName="DynamicJD.manifest.json" />
+    <EmbeddedResource Include="Versioning\manifest-modern.json"
+                      Condition="'$(VersionFamily)' == 'modern'"
+                      LogicalName="DynamicJD.manifest.json" />
+    <EmbeddedResource Include="UI\Menu\*.bsml" />
+    <EmbeddedResource Include="UI\Clone\*.bsml" />
+  </ItemGroup>
+
+</Project>
