@@ -65,6 +65,18 @@
       <HintPath>$(RefAsmDir)\Main.dll</HintPath>
       <Private>false</Private>
     </Reference>
+    <Reference Include="BeatSaber.GameSettings">
+      <HintPath>$(RefAsmDir)\BeatSaber.GameSettings.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="BeatSaber.Settings">
+      <HintPath>$(RefAsmDir)\BeatSaber.Settings.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="BGLib.FileStorage">
+      <HintPath>$(RefAsmDir)\BGLib.FileStorage.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
     <Reference Include="BGLib.UnityExtension">
       <HintPath>$(RefAsmDir)\BGLib.UnityExtension.dll</HintPath>
       <Private>false</Private>
@@ -144,6 +156,7 @@
                       LogicalName="DynamicJD.manifest.json" />
     <EmbeddedResource Include="UI\Menu\*.bsml" />
     <EmbeddedResource Include="UI\Clone\*.bsml" />
+    <EmbeddedResource Include="UI\Audio\*.bsml" />
   </ItemGroup>
 
 </Project>

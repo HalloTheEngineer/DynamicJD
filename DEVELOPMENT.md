@@ -42,8 +42,8 @@ tools/build-artifacts.sh
 
 The script runs the tests, builds both versions, checks the embedded `gameVersion`, and writes:
 
-- `dist/DynamicJD-0.1.0-bs1.40.8.zip`
-- `dist/DynamicJD-0.1.0-bs1.42.0.zip`
+- `dist/DynamicJD-0.2.0-alpha.1-bs1.40.8.zip`
+- `dist/DynamicJD-0.2.0-alpha.1-bs1.42.0.zip`
 
 `dist/`, `bin/`, and `obj/` are ignored by Git.
 
@@ -53,7 +53,8 @@ There is no GitHub Actions build. Build locally, smoke-test the intended version
 GitHub release manually and attach the matching zip.
 
 - Stable: `v0.1.0` -> `DynamicJD-0.1.0-bs1.40.8.zip`
-- Alpha: `v0.1.0-alpha.1` -> `DynamicJD-0.1.0-bs1.42.0.zip`
+- Audio alpha: `v0.2.0-alpha.1` -> `DynamicJD-0.2.0-alpha.1-bs1.40.8.zip`
+- 1.42 alpha: `v0.1.0-alpha.1` -> `DynamicJD-0.1.0-bs1.42.0.zip`
 
 Increment the alpha suffix for later alpha fixes.
 
@@ -65,8 +66,34 @@ Increment the alpha suffix for later alpha fixes.
 - `NoteMovementPatches` implements optional instant note rotation.
 - `CompatibilityPatches` contains only the version-gated SongCore negative-NJS protection and the
   1.44 BeatLeader recorder bridge.
+- `AudioOffsetPatches` starts a sample session at `AudioTimeSyncController.Start` and listens to
+  `ScoreController.scoringForNoteStartedEvent` for clean local cuts.
+- `AudioOffsetTracker` stores the latest run and `AudioOffsetService` applies a confirmed
+  recommendation to `SettingsManager.settings.audio.latency`, saving through `SettingsIO`.
 - Replay playback deliberately follows the normal gameplay path; there is no replay-specific
   SiraUtil/BeatLeader patching.
+
+## Audio offset model
+
+`GameNoteController.HandleCut` supplies:
+
+```text
+timeDeviation = noteData.time - songTime
+positive = early cut, negative = late cut
+```
+
+The estimator filters outliers with a median/MAD rule, computes the mean accepted deviation and its
+95% confidence interval, and recommends:
+
+```text
+suggestedDelta = -mean(timeDeviation)
+newLatency = clamp(currentLatency + suggestedDelta, 0, 0.3)
+```
+
+A recommendation requires at least 30 accepted cuts, a 5 ms deadband, a confidence interval that
+excludes zero, and a maximum step of 50 ms. Replays, practice mode, non-1.0x song speed, chain links,
+and the first five seconds of a map are ignored. The **DynamicJD - Audio** tab renders all clean cuts into
+one generated `Texture2D`; it is redrawn only when a run finishes, not per frame.
 
 ## JD model
 

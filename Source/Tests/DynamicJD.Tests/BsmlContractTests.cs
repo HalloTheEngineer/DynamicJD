@@ -18,6 +18,7 @@ namespace DynamicJD.Tests
             ("UI/Menu/mainMenu.bsml", "UI/Menu/MainMenuTab.cs"),
             ("UI/Menu/jdOverridePanel.bsml", "UI/Menu/JdOverrideMenuPanelController.cs"),
             ("UI/Clone/clone.bsml", "UI/Clone/CloneViewController.cs"),
+            ("UI/Audio/audioMenu.bsml", "UI/Audio/AudioMenuTab.cs"),
         };
 
         private static readonly HashSet<string> Literals = new HashSet<string>(StringComparer.OrdinalIgnoreCase)

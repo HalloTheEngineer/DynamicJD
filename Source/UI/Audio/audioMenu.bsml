@@ -1,0 +1,50 @@
+<bg xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+    xsi:schemaLocation='https://monkeymanboy.github.io/BSML-Docs/ https://monkeymanboy.github.io/BSML-Docs/BSMLSchema.xsd'>
+    <settings-container child-control-width='true' child-expand-width='true' size-delta-y='-8'>
+        <horizontal preferred-width='100' preferred-height='6'>
+            <text text='AUDIO OFFSET' font-size='4' align='Center' font-color='#cc99ffff' underlined='true'/>
+        </horizontal>
+
+        <checkbox-setting value='analysis_enabled' on-change='set_analysis_enabled'
+                          text='Analyze audio offset'
+                          hover-hint='Collect timing data from clean cuts at 1.0x speed. Replays, practice, and timed maps are ignored.'/>
+        <horizontal preferred-width='100' preferred-height='5'>
+            <text text='Current audio offset' font-size='3' align='Left'/>
+            <text text='~current_offset' font-size='3' align='Right' rich-text='true'/>
+        </horizontal>
+        <horizontal preferred-width='100' preferred-height='5'>
+            <text text='~status_text' font-size='3' align='Left' rich-text='true' word-wrapping='true'/>
+        </horizontal>
+
+        <horizontal preferred-width='100' preferred-height='4'/>
+        <horizontal preferred-width='100' preferred-height='5'>
+            <text text='~recommendation_title' font-size='4' align='Left' rich-text='true' word-wrapping='true'/>
+        </horizontal>
+        <horizontal preferred-width='100' preferred-height='6'>
+            <text text='~recommendation_value' font-size='5' align='Left' rich-text='true'/>
+        </horizontal>
+        <horizontal preferred-width='100' preferred-height='4'>
+            <text text='~recommendation_detail' font-size='3' align='Left' rich-text='true' word-wrapping='true'/>
+        </horizontal>
+
+        <horizontal preferred-width='100' preferred-height='28' active='~has_graph'>
+            <raw-image id='audio_offset_graph' preferred-width='100' preferred-height='28'/>
+        </horizontal>
+        <horizontal preferred-width='100' preferred-height='4' active='~has_graph'>
+            <text text='~graph_caption' font-size='2.5' align='Left' rich-text='true' word-wrapping='true'/>
+        </horizontal>
+
+        <horizontal preferred-width='100' preferred-height='7' active='~has_actions'>
+            <button text='Apply' on-click='apply_suggestion' active='~has_suggestion'
+                    hover-hint='Write the recommendation to Beat Saber audio latency.'/>
+            <button text='Undo' on-click='undo_offset' active='~has_undo'
+                    hover-hint='Restore the previous game audio latency.'/>
+            <button text='Clear' on-click='clear_results' active='~has_graph'
+                    hover-hint='Discard the latest timing samples.'/>
+        </horizontal>
+
+        <horizontal preferred-width='100' preferred-height='4'>
+            <text text='Guide only: timing includes audio, input, visual, and human bias.' font-size='2.5' align='Left' rich-text='true' word-wrapping='true'/>
+        </horizontal>
+    </settings-container>
+</bg>

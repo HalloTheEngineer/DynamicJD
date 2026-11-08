@@ -91,6 +91,7 @@ namespace DynamicJD
             VariableMovementDataProviderInitPatch.Patch(Harmony);
             InstantNoteRotationPatch.Patch(Harmony);
             CompatibilityPatches.Patch(Harmony);
+            AudioOffsetPatches.Patch(Harmony);
             Log.Info("DynamicJD enabled. Profiles: " + string.Join(", ", Profiles.Names));
         }
 
@@ -106,6 +107,7 @@ namespace DynamicJD
 
         private static void OnActiveSceneChanged(Scene previous, Scene next)
         {
+            AudioOffsetTracker.EndRun();
             ReplayGuard.Refresh(next.name);
             if (ReplayGuard.ShouldApplyModBehaviors) return;
             NjsCompensation.Disarm();

@@ -7,6 +7,7 @@ cd "$ROOT"
 : "${DYNAMICJD_1408_DIR:?Set DYNAMICJD_1408_DIR to the Beat Saber 1.40.8 directory}"
 : "${DYNAMICJD_1420_DIR:?Set DYNAMICJD_1420_DIR to the Beat Saber 1.42.0 directory}"
 
+VERSION="0.2.0-alpha.1"
 DIST="$ROOT/dist"
 rm -rf "$DIST"
 mkdir -p "$DIST"
@@ -42,9 +43,9 @@ build_one() {
         cp Source/bin/Release/DynamicJD.pdb "$stage/Plugins/DynamicJD.pdb"
     fi
 
-    (cd "$stage" && zip -qr "$DIST/DynamicJD-0.1.0-bs${range}.zip" Plugins)
+    (cd "$stage" && zip -qr "$DIST/DynamicJD-${VERSION}-bs${range}.zip" Plugins)
     rm -rf "$stage"
-    echo "Created $DIST/DynamicJD-0.1.0-bs${range}.zip"
+    echo "Created $DIST/DynamicJD-${VERSION}-bs${range}.zip"
 }
 
 build_one legacy 1.40.8 1.40.8 legacy "$DYNAMICJD_1408_DIR"

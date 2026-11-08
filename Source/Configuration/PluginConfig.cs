@@ -36,6 +36,13 @@ namespace DynamicJD.Configuration
         public virtual bool apply_in_replays { get; set; } = true;
         public virtual bool show_hud { get; set; } = false;
 
+        public virtual bool audio_offset_analysis { get; set; } = false;
+        public virtual int audio_offset_min_samples { get; set; } = 30;
+        public virtual float audio_offset_max_step_ms { get; set; } = 50f;
+        public virtual bool audio_offset_has_undo { get; set; }
+        public virtual float audio_offset_undo_latency { get; set; }
+        public virtual bool audio_offset_undo_override { get; set; }
+
         public virtual int clone_sample_count { get; set; } = 60;
         public virtual bool offline_mode { get; set; } = false;
         public virtual float curve_editor_min_njs { get; set; } = 8f;
@@ -54,6 +61,17 @@ namespace DynamicJD.Configuration
             if (min_jump_distance < 0.1f) min_jump_distance = 0.1f;
             if (max_jump_distance <= min_jump_distance) max_jump_distance = min_jump_distance + 1f;
             if (song_speed_mode < 0 || song_speed_mode > 1) song_speed_mode = 0;
+            if (audio_offset_min_samples < 10) audio_offset_min_samples = 10;
+            if (audio_offset_min_samples > 200) audio_offset_min_samples = 200;
+            if (audio_offset_max_step_ms < 5f) audio_offset_max_step_ms = 5f;
+            if (audio_offset_max_step_ms > 100f) audio_offset_max_step_ms = 100f;
+            if (audio_offset_has_undo &&
+                (audio_offset_undo_latency < 0f || audio_offset_undo_latency > 0.3f))
+            {
+                audio_offset_has_undo = false;
+                audio_offset_undo_latency = 0f;
+                audio_offset_undo_override = false;
+            }
             if (clone_sample_count < 10) clone_sample_count = 10;
             if (clone_sample_count > 300) clone_sample_count = 300;
             if (curve_editor_min_njs < 1f) curve_editor_min_njs = 1f;

@@ -46,6 +46,21 @@ Open the **DynamicJD** tab and select **Custom**.
 You can also use the floating **JD Override** control below the song list. It replaces the normal
 profile result with one fixed JD for every map while enabled.
 
+## Audio offset
+
+The **DynamicJD - Audio** tab can estimate a better **audio latency** value from your actual cuts.
+
+1. Enable **Analyze audio offset**.
+2. Play a standard song at `1.0x` speed with at least 30 clean cuts.
+3. Return to the menu. The tab shows the latest sample count, a recommendation, and a dot plot of
+   every clean cut.
+4. Press **Apply** to write the recommendation to Beat Saber's audio latency.
+   **Undo** restores the previous value.
+
+The recommendation is deliberately conservative. It ignores outliers, requires a confident timing
+bias, and is capped to a modest change per run. Replays, practice mode, chain links, and timed
+songs are excluded. Nothing is written to your game settings until you confirm it.
+
 ## Map types
 
 DynamicJD can shape your JD by map style:
@@ -79,6 +94,7 @@ DynamicJD applies to BeatLeader and ScoreSaber replay playback by default, using
 
 | Release | Status | Notes |
 |---|---|---|
+| `v0.2.0-alpha.1` | Alpha | Beat Saber **1.40.8**; adds the audio offset assistant |
 | `v0.1.0` | Stable | Beat Saber **1.40.8**; BeatLeader and ScoreSaber replay supported |
 | `v0.1.0-alpha.1` | Alpha | Beat Saber **1.42.0**; use stock SiraUtil `3.4.0+bs.1.42.0` and BeatLeader `0.10.666` |
 | `1.44.1` | Not yet released | Waiting for compatible stock SiraUtil support |

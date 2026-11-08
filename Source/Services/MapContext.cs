@@ -21,6 +21,7 @@ namespace DynamicJD.Services
         public float OriginalJumpDistance { get; set; }
         public float SongSpeedMultiplier { get; set; } = 1f;
         public float NjsGainMultiplier { get; set; } = 1f;
+        public bool IsPractice { get; set; }
         public string CustomSpeedModifierId { get; set; } = string.Empty;
         public MapTypeInfo Type { get; set; } = MapTypeInfo.Unknown();
 
@@ -67,6 +68,7 @@ namespace DynamicJD.Services
                 PlayerOffset = playerOffset,
                 SongSpeedMultiplier = speed,
                 NjsGainMultiplier = speed,
+                IsPractice = practiceSettings != null,
             };
 
             if (practiceSettings == null && ModifiersCoreBridge.TryGetActiveSpeedModifier(out CustomSpeedModifierSpec custom))

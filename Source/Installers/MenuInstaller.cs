@@ -1,4 +1,5 @@
 using DynamicJD.Services;
+using DynamicJD.UI.Audio;
 using DynamicJD.UI.Clone;
 using DynamicJD.UI.Menu;
 using Zenject;
@@ -15,6 +16,8 @@ namespace DynamicJD.Installers
             Container.Bind<CloneFlowCoordinator>().FromNewComponentOnNewGameObject().AsSingle();
             Container.Bind<CloneViewController>().FromNewComponentAsViewController().AsSingle();
             Container.BindInterfacesAndSelfTo<MainMenuTab>().AsSingle();
+            Container.Bind<AudioOffsetService>().AsSingle();
+            Container.BindInterfacesAndSelfTo<AudioMenuTab>().AsSingle();
         }
     }
 }
