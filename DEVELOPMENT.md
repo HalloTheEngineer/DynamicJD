@@ -54,7 +54,7 @@ GitHub release manually and attach the matching zip.
 
 - Stable: `v0.1.0` -> `DynamicJD-0.1.0-bs1.40.8.zip`
 - Audio alpha: `v0.2.0-alpha.1` -> `DynamicJD-0.2.0-alpha.1-bs1.40.8.zip`
-- 1.42 alpha: `v0.1.0-alpha.1` -> `DynamicJD-0.1.0-bs1.42.0.zip`
+- 1.42 audio alpha: `v0.2.0-alpha.1-bs1.42.0` -> `DynamicJD-0.2.0-alpha.1-bs1.42.0.zip`
 
 Increment the alpha suffix for later alpha fixes.
 

@@ -96,7 +96,7 @@ DynamicJD applies to BeatLeader and ScoreSaber replay playback by default, using
 |---|---|---|
 | `v0.2.0-alpha.1` | Alpha | Beat Saber **1.40.8**; adds the audio offset assistant |
 | `v0.1.0` | Stable | Beat Saber **1.40.8**; BeatLeader and ScoreSaber replay supported |
-| `v0.1.0-alpha.1` | Alpha | Beat Saber **1.42.0**; use stock SiraUtil `3.4.0+bs.1.42.0` and BeatLeader `0.10.666` |
+| `v0.2.0-alpha.1-bs1.42.0` | Alpha | Beat Saber **1.42.0**; audio offset assistant; known Linux/Proton BSIPA issue |
 | `1.44.1` | Not yet released | Waiting for compatible stock SiraUtil support |
 
 The **1.42** alpha is for testing. On Linux/Proton, BSIPA `4.3.7` has a known upstream access-violation
